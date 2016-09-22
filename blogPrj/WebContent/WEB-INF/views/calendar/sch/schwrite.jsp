@@ -28,6 +28,7 @@
 <%@page import="sist.co.help.myCal"%>
 <%@page import="java.util.Calendar"%>
 
+
 <%!
 public String two (String msg){
 	return msg.trim().length() < 2 ? "0"+msg : msg.trim(); 
@@ -67,6 +68,24 @@ $.datepicker.setDefaults({
 /* date picker */
 $(function(){
 	$("#datepicker1, #datepicker2").datepicker();
+});
+
+/* 오늘 날짜로 설정 */
+$(function() { 
+     $('#datepicker1').val($.datepicker.formatDate($.datepicker.ATOM, new Date())); 
+     $('#datepicker2').val($.datepicker.formatDate($.datepicker.ATOM, new Date())); 
+});
+
+/* 날짜 값 전달 */
+$(function(){
+	$('#datepicker1').val();
+	var syear = $('#datepicker1').val().substring(0,4);
+	var smonth = $('#datepicker1').val().substring(5,7);
+	var sday = $('#datepicker1').val().substring(8,11);
+	
+	$('#syear').val(syear);
+	$('#smonth').val(smonth);
+	$('#sday').val(sday);
 });
 
 /* 종일 클릭 시*/
@@ -164,10 +183,11 @@ $(function(){
         	</select>
         	
       
-        	<input type="text" id="datepicker1" class="date_input" name="sch_stardate" value="<%=tyear%>.<%=two(month+"")%>.<%=two(tday+"")%>">
-			<input type="hidden" name="syear" value="<%=tyear %>">
-			<input type="hidden" name="smonth" value="<%=month %>">
-			<input type="hidden" name="sday" value="<%=tday %>">
+        	<input type="text" id="datepicker1" class="date_input" name="sch_stardate" value="">
+
+			<input type="hidden" id="syear" name="syear" value="">
+			<input type="hidden" id="smonth" name="smonth" value="">
+			<input type="hidden" id="sday" name="sday" value="">
 			
 			<div class="selectbox13" data-lang-am="오전" data-lang-pm="오후" data-alert="형식에 맞게 입력해주세요
 			예) 1230, 3:10, 오후 2시">
@@ -228,9 +248,9 @@ $(function(){
     		
     		
     		<input type="text" id="datepicker2" class="date_input" name="sch_enddate" value="<%=tyear%>.<%=two(month+"")%>.<%=two(tday+"")%>">
-			<input type="hidden" name="eyear" value="<%=tyear %>">
-			<input type="hidden" name="emonth" value="<%=month %>">
-			<input type="hidden" name="eday" value="<%=tday %>">
+			<input type="hidden" name="eyear" value="<%=tyear%>">
+			<input type="hidden" name="emonth" value="12">
+			<input type="hidden" name="eday" value="12">
 			
 			
 			
