@@ -29,7 +29,7 @@
 <ul class="nav nav-tabs" role="tablist" id="myTab">
   <li rel="tab1" role="presentation" class="active" ><a href="#receive" id="friendtab" aria-controls="presentation" role="tab" data-toggle="tab">받은신청</a></li>
   <li rel="tab2" role="presentation"><a href="#send" id="grouptab">보낸신청</a></li>
-  <li rel="tab3" role="presentation"><a href="#message" id="seqtab">안내메시지</a></li>
+  <!-- <li rel="tab3" role="presentation"><a href="#message" id="seqtab">안내메시지</a></li> -->
   <br><br>
 
 

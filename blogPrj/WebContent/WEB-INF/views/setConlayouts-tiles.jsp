@@ -39,10 +39,10 @@
 
 
 		<!-- 이웃설정 -->
-		<div id="content" style="width:750px;background-color: #fff;">
+		<div id="content" style="width:750px;">
 			<tiles:insertAttribute name="content" />
 			<!-- 탭내용 -->
-			<div id="main" style="background-color: #fff;">
+			<div id="main">
 				<tiles:insertAttribute name="main" />
 			</div>
 			<!-- 탭내용 -->

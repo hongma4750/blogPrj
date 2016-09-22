@@ -1,8 +1,12 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-    
+<!DOCTYPE html>
+<!-- tag들 필요하면 Ctrl+c  /   Ctrl+v -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<fmt:requestEncoding value ="utf-8"/> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
+<fmt:requestEncoding value="utf-8"/>
+<!-- tag들 필요하면 Ctrl+c  /   Ctrl+v -->
 
 <!-- 부트스트랩 링크 -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,12 +20,12 @@
 <!-- 이곳은 받은신청 탭_내용 -->
 
 
-        <button type="button">수락</button>
-		<button type="button">거절</button>
+        <button type="button" class="btn btn-default btn-xs">수락</button>
+		<button type="button" class="btn btn-default btn-xs">거절</button>
 
 <br><br>
 
-<form method="post">
+
 		<table border="1" style="align: center">
 			<col width="30px" />
 			<col width="400px" />
@@ -45,17 +49,27 @@
 			</c:if>
 			
 		  <!-- 받은 서로이웃 신청이 있으면 -->
+			
 			<c:if test="${not empty Rfolist }">
 			
+			<form name="frmForm2" id="_frmForm2" action="acceptDblfol.do" target="pop" method="post">
+			
 			<c:forEach items="${Rfolist }" var="Rfl">
+			
 			<tr>
 				<td><input type="checkbox" id="_chk"></td>
 				<td>${Rfl.df_send }</td>
 				<td>${Rfl.df_msg }</td>
 				<td>${Rfl.df_date }</td>
-				<td><button class="btn btn-default btn-xs" onclick="popupOpen(1);">수락</button><button class="btn btn-default btn-xs" onclick="popupOpen(2);">거절</button></td>
+				<td><button class="btn btn-default btn-xs" onclick="popupOpen(1);" >수락</button><button class="btn btn-default btn-xs" onclick="popupOpen(2);">거절</button></td>
 			</tr>
+			
+			<input type="hidden" id="_seq" name="seq" value="${Rfl.df_seq }" />
+			<input type="hidden" name="blogId" value="${Rfl.df_send }" />
+			
 			</c:forEach>
+			
+			</form>
 			
 			</c:if>
 			
@@ -64,8 +78,8 @@
 
 		<div>
 			<input type="checkbox">&nbsp;전체선택&nbsp;
-			<button type="button">수락</button>
-			<button type="button">거절</button>
+			<button type="button" class="btn btn-default btn-xs">수락</button>
+			<button type="button" class="btn btn-default btn-xs">거절</button>
 		</div>
 <br><br>		
 		
@@ -108,11 +122,11 @@ function popupOpen(chk){
 	//수락버튼 클릭시
 	if (chk==1){
 		
-		window.open("acceptDblfol.do?blogId=${Rfl.df_send}","",popOption);
+		window.open("acceptDblfol.do","pop",popOption);
 	}
 	//거절버튼 클릭시
 	if (chk==2){
-		window.open("noDblfol.do?blogId=${Rfl.df_send}","",popOption);
+		window.open("noDblfol.do","",popOption);
 	}
 }
 </script>

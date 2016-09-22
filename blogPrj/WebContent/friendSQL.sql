@@ -30,6 +30,8 @@ references member(m_id);
 --2. 서로 이웃 맺기 테이블(수락 여부에 따라 맺어짐)
 --2016.9.18 추가 컬럼 df_groupname varchar2(50),-- 그룹명
 --2016.9.18 수정 컬럼 df_groupname->fnd_groupname
+
+
 select * from dblfollowing
 
 drop table dblfollowing
@@ -138,11 +140,11 @@ select* from friend
 --insert into FOLLOWING values (seq_following.NEXTVAL, 'bom', 'summer', '20160912' );
 
 insert into friend
-values(seq_friend.NEXTVAL, 'aa1212', 'summer', '친구들', 1,sysdate,0); 
+values(seq_friend.NEXTVAL, 'aa1212', 'ccc123', '친구들', 1,sysdate,0); 
 
 insert into fsetting values(seq_fsetting.NEXTVAL, 'bom', 0);
 
-insert into fgroup values(seq_fgroup.NEXTVAL, '친구들', 'aa1212',0);
+insert into fgroup values(seq_fgroup.NEXTVAL, '친구들', 'chloevergreen',0);
 
 --summer<->aaa 서로이웃
 

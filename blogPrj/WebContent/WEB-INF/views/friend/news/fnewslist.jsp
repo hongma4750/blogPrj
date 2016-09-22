@@ -40,8 +40,7 @@
 <!-- 이웃 추천 토글박스 -->
 <c:if test="${not empty fnd }"> 
 
-<!-- 이웃의 이웃이 있으면 -->
-<c:if test="${not empty fofflist }">
+
 
 <div id="recommendbox" style="border:1px solid #eaeaea; padding:10px;">
 
@@ -54,13 +53,18 @@
 <div id="recommendbox_hide" style="display:'inherit';">
 
 
-<c:forEach items="${fofflist }" var="recomm_fl" end="1">
+<c:forEach items="${fofflist }" var="recomm_fl" end="2">
 
 
 
+    <form action="addfriend.do?blogid=${recomm_fl.fnd_fndid }" target="FollowPop" method="post">
+
+<!-- 이웃의 이웃이 있으면 -->
+<c:if test="${not empty fofflist }">
+<!-- 내 아이디 제외하기 -->
+<c:if test="${recomm_fl.fnd_fndid ne login.m_id}">
 <!-- 내 친구가 아닐때 추천받기 -->
 <c:if test="${fnd.fnd_fndid ne recomm_fl.fnd_fndid}">
-    <form action="addfriend.do?blogid=${recomm_fl.fnd_fndid }" target="FollowPop" method="post">
 		
 		<table style="margin: 10px;">
 		<col width="35px"/><col width="110px"/><col width="40px"/><col width="60px"/>
@@ -88,22 +92,38 @@
 
 		</table>
 		
-    </form>
 </c:if> 
+<!-- 내친구가 아닌사람 추천받기 -->
+</c:if>
+<!-- 내 아이디 제외하기 -->
+</c:if>
+<!-- 이웃의 이웃이 있으면 -->
+
+<!-- 이웃의 이웃이 없을때 -->
+<c:if test="${empty fofflist }">
+내 이웃들과 이웃하고 있는 새로운 블로거가 없습니다
+</c:if>
+<!-- 이웃의 이웃이 없을때 -->
+		
+    </form>
+
 
 </c:forEach>
 
 </div>
 </div>
 
-</c:if>
-<!-- 이웃의 이웃이 있으면 -->
-</c:if>
-<!-- 이웃이 있을때 -->
+
 
 <br>
 
 <!-- 이웃 추천 토글박스 -->
+
+
+
+
+
+
 
 <!-- 이웃이 새글이 있을 때 -->
 <c:if test="${not empty flist }">
@@ -175,6 +195,9 @@
 <!-- 이웃이 새글이 있을 때 -->
 
 
+</c:if>
+<!-- 이웃이 있을때 -->
+
 <!-- 이웃이 없을 때 -->
 <c:if test="${empty fnd }">
 	<div align="center" style="color:#666;">아직 이웃이 없습니다.
@@ -183,11 +206,7 @@
 <!-- 이웃이 없을 때 -->
 </c:if>
 
-<!-- 이웃의 이웃이 없을때 -->
-<c:if test="${empty fofflist }">
-    <div align="center" style="color:#666;">이웃의 이웃이 없습니다.</div>
-</c:if>
-<!-- 이웃의 이웃이 없을때 -->
+
 
 </c:if>
 <!-- 로그인했을때 -->

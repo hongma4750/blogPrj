@@ -36,12 +36,45 @@
 <table style="text-align: center;">
 <col width="100px"/><col width="300px"/><col width="100px"/>
 <tr height="25px" style="background-color: #D8D8D8;">
-  <th style="text-align: center;"><select><option selected="selected">이웃전체</option><option>이웃</option><option>서로이웃</option></select></th>
+  <th style="text-align: center;"><select name="_selFchk"><option selected="selected" value="1" onclick="sel1();">이웃전체</option><option value="2">이웃</option><option value="3">서로이웃</option></select></th>
   <th style="text-align: center;">이웃</th>
   <th style="text-align: center;">쪽지쓰기</th>
 </tr>
 
+<!-- 이웃이 있을때 -->
 <c:if test="${not empty flist }">
+
+<!-- sel이웃을 클릭하면 -->
+<c:if test="${param.name==1}">
+   <c:if test="${not empty flistF1 }">
+   <c:forEach items="${flistF1 }" var="fl">
+					<tr>
+						<td>이웃</td>
+						<td>${fl.fnd_fndid }| 블로그명</td>
+						<td><button type="button" class="glyphicon glyphicon-pencil"></button></td>
+					</tr>
+	</c:forEach>
+	</c:if>
+	<c:if test="${empty flistF1 }">
+	이웃이 없습니다.
+	</c:if>
+</c:if>
+
+<!-- sel서로이웃을 클릭하면 -->
+<c:if test="${param.name==2}">
+   <c:if test="${not empty flistF2 }">
+   
+   <c:forEach items="${flistF2 }" var="fl">
+					<tr>
+						<td>이웃</td>
+						<td>${fl.fnd_fndid }| 블로그명</td>
+						<td><button type="button" class="glyphicon glyphicon-pencil"></button></td>
+					</tr>
+   </c:forEach>
+   </c:if>
+</c:if>
+
+<!-- 전체조회 -->
 <c:forEach items="${flist }" var="fl">
 <tr>
   <td>
@@ -58,6 +91,10 @@
 </c:forEach>
 </c:if>
 
+
+
+<!-- 이웃이 있을때 -->
+
 <c:if test="${empty flist }">
   <div align="center" style="color:#666;">아직 이웃이 없습니다.
 	<br>주제별 글 보기를 통해 관심 주제의 블로그 이웃을
@@ -71,4 +108,6 @@
 $(function () {
     $('#myTab a:first').tab('show')
 });
+
+
 </script>
