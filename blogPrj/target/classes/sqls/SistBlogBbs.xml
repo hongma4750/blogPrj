@@ -23,12 +23,12 @@
 	</select>
 	
 	<!-- 게시판 내용 수정 -->
-	<update id="updateBBS" parameterType="sist.co.Model.SistBlogDTO">
-		UPDATE BLOG_BBS SET 
-			BBS_CA_SEQ=#{bbs_ca_seq}, BBS_TITLE=#{bbs_title}, BBS_CONTENT=#{bbs_content},
-			BBS_HID=#{bbs_hid}, BBS_COMCHK=#{bbs_comchk}, BBS_LIKECHK=#{bbs_likechk},BBS_SCRAPCHK=#{bbs_scrapchk}
-		WHERE BBS_SEQ=#{bbs_seq}
-	</update> 
+   <update id="updateBBS" parameterType="sist.co.Model.SistBlogDTO">
+      UPDATE BLOG_BBS SET 
+         BBS_CA_SEQ=#{bbs_ca_seq}, BBS_TITLE=#{bbs_title}, BBS_CONTENT=#{bbs_content},
+         BBS_HID=#{bbs_hid},  BBS_COMCHK=1, BBS_LIKECHK=1,BBS_SCRAPCHK=#{bbs_scrapchk}
+      WHERE BBS_SEQ=#{bbs_seq}
+   </update> 
 
 	<!-- 게시물 삭제 -->
 	<delete id="delBBS" parameterType="java.lang.Integer">

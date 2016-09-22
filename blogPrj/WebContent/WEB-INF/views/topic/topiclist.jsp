@@ -14,11 +14,17 @@
 
 <!-- 여기는 주제별글보기 전체메뉴 영역 -->
 
-
 <!-- 주제별 글보기 세부 메뉴(전체,문화/책, 영화, 요리/레시피, 스포츠, 세계여행 ) -->
-<div id="topic_menu" style="position:relative; z-index:1;">
-  <a href ="topiclist.do">전체</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">문화·책</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">영화</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">요리·레시피</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">스포츠</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">세계여행</a>
-</div>
+  <ul class="list-inline">
+    <li><a href ="topiclist.do">전체</a></li>
+    <li><a href="#">문화·책</a></li>
+    <li><a href="#">영화</a></li>
+    <li><a href="#">요리·레시피</a></li>
+    <li><a href="#">스포츠</a></li>
+    <li><a href="#">세계여행</a></li>
+  </ul>
+  <!-- 이웃 소식보기 세부 메뉴(전체,이웃새글,이웃의이웃 ) -->
+
 <hr>
 
 <!-- 주제별글보기 리스트 -->
