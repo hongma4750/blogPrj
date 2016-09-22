@@ -27,13 +27,31 @@ public class SistFriendDAO {
 			return f;
 		}
 
-		//나의 이웃들 정보 가져오기
+		//나의 전체 이웃들 정보 가져오기
 		public List<SistFriendVO> getFriends(String myid) throws Exception{
 			
 			List<SistFriendVO> flist = new ArrayList<SistFriendVO>();
 			flist = sqlsession.selectList(ns+"getFriends", myid);
 			
 			return flist;
+		}
+		
+		//나의 이웃들만 정보 가져오기
+		public List<SistFriendVO> get1FolFriends(String myid) throws Exception{
+
+			List<SistFriendVO> flistF1 = new ArrayList<SistFriendVO>();
+			flistF1 = sqlsession.selectList(ns+"get1FolFriends", myid);
+
+			return flistF1;
+		}
+		
+		//나의 서로이웃들 정보 가져오기
+		public List<SistFriendVO> get2FolFriends(String myid) throws Exception{
+
+			List<SistFriendVO> flistF2 = new ArrayList<SistFriendVO>();
+			flistF2 = sqlsession.selectList(ns+"get2FolFriends", myid);
+
+			return flistF2;
 		}
 		
 		//해당 이웃의 이웃 정보 가져오기

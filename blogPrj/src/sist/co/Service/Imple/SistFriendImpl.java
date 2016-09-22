@@ -28,14 +28,25 @@ public class SistFriendImpl implements SistFriendService {
 		return sistFriendDAO.getFriend(myid);
 	}
 
-	//이웃들 정보가져오기	
+	//전체 이웃들 정보가져오기	
 	@Override
 	@Transactional
 	public List<SistFriendVO> getFriends(String myid) throws Exception {
 
 		return sistFriendDAO.getFriends(myid);
 	}
-
+	
+	//이웃만 
+	@Override
+	public List<SistFriendVO> get1FolFriends(String myid) throws Exception {
+		return sistFriendDAO.get1FolFriends(myid);
+	}
+	
+	//서로이웃만 
+	@Override
+	public List<SistFriendVO> get2FolFriends(String myid) throws Exception {
+		return sistFriendDAO.get2FolFriends(myid);
+	}
 
 	//해당 이웃의 이웃
 	@Override

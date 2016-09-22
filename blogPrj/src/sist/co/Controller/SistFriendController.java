@@ -34,43 +34,48 @@ public class SistFriendController {
 	@Autowired
 	SistFriendService sistFriendService;
 	
-	    //주제별글보기_전체
-		@RequestMapping(value="topiclist.do",method={RequestMethod.GET,RequestMethod.POST})
-		public String topiclist(Model model){
-			logger.info("환영합니다. topiclist.do 실행중");
-			return "index.tiles";
-		}
+	//주제별글보기_전체
+			@RequestMapping(value="topiclist.do",method={RequestMethod.GET,RequestMethod.POST})
+			public String topiclist(Model model){
+				logger.info("환영합니다. topiclist.do 실행중");
+				return "topiclist.tiles";
+			}
 		
-		//이웃 소식_전체
-		@RequestMapping(value="fnewslist.do",method={RequestMethod.GET,RequestMethod.POST})
-		public String fnewslist(HttpServletRequest request,String myid, Model model) throws Exception{
-			
-			logger.info("환영합니다. fnewslist.do 실행중");
-			
-			//'로그인 한 사람' 정보 취득
-			String id = ((SistMemberVO)request.getSession().getAttribute("login")).getM_id();
-			logger.info(id + "?? ");
-			
-			//랜덤으로 이웃 한명 조회
-			SistFriendVO fnd = sistFriendService.getFriend(id);
-			
-			System.out.println(fnd.toString());
-			model.addAttribute("fnd", fnd);
+			//이웃 소식_전체
+		      @RequestMapping(value="fnewslist.do",method={RequestMethod.GET,RequestMethod.POST})
+		      public String fnewslist(HttpServletRequest request,String myid, Model model) throws Exception{
+		         
+		         logger.info("환영합니다. fnewslist.do 실행중");
+		         
+		         //'로그인 한 사람' 정보 취득
+		         String id = ((SistMemberVO)request.getSession().getAttribute("login")).getM_id();
+		         logger.info(id + "?? ");
+		         
+		         //랜덤으로 이웃 한명 조회
+		         SistFriendVO fnd = sistFriendService.getFriend(id);
+		         
+		         if(fnd!=null){
+		      
+		            System.out.println(fnd.toString());
+		            model.addAttribute("fnd", fnd);
 
-			//내 이웃의 이웃 추천
-			List<SistFriendVO> fofflist = sistFriendService.gettheFofFriends(fnd);
-			System.out.println(fofflist.toString());
-			model.addAttribute("fofflist", fofflist);
-			
-			//로그인 계정의 이웃들
-			List<SistFriendVO> flist = sistFriendService.getFriends(id);
+		            
+		            //내 이웃의 이웃 추천
+		            List<SistFriendVO> fofflist = sistFriendService.gettheFofFriends(fnd);
+		            System.out.println(fofflist.toString());
+		            model.addAttribute("fofflist", fofflist);
 
-			System.out.println(flist.toString());
-			model.addAttribute("flist", flist);
+		            //로그인 계정의 이웃들
+		            List<SistFriendVO> flist = sistFriendService.getFriends(id);
 
-			
-			return "fnewslist.tiles";
-		}
+		            System.out.println(flist.toString());
+		            model.addAttribute("flist", flist);
+		         
+		         }
+
+		         
+		         return "fnewslist.tiles";
+		      }
 		
 		//이웃 소식_새글보기	
 		@RequestMapping(value="newlist.do",method={RequestMethod.GET,RequestMethod.POST})
@@ -122,9 +127,20 @@ public class SistFriendController {
 			String id = ((SistMemberVO)request.getSession().getAttribute("login")).getM_id();
 			logger.info(id + "?? ");
 
+			//전체친구목록
 			List<SistFriendVO> flist = sistFriendService.getFriends(id);
 			System.out.println(flist.toString());
 			model.addAttribute("flist", flist);
+			
+			//이웃목록만get1FolFriends
+			List<SistFriendVO> flistF1 = sistFriendService.get1FolFriends(id);
+			System.out.println(flistF1.toString());
+			model.addAttribute("flistF1", flistF1);
+			
+			//서로이웃목록만get2FolFriends
+			List<SistFriendVO> flistF2 = sistFriendService.get1FolFriends(id);
+			System.out.println(flistF2.toString());
+			model.addAttribute("flistF2", flistF2);
 
 			return "friends.tiles";
 		}

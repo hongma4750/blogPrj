@@ -15,6 +15,12 @@ public interface SistFriendService {
 
 	//이웃들 정보가져오기
 	public List<SistFriendVO> getFriends(String myid) throws Exception;
+	
+	//이웃목록만
+	public List<SistFriendVO> get1FolFriends(String myid) throws Exception;
+	
+	//서로이웃목록만
+	public List<SistFriendVO> get2FolFriends(String myid) throws Exception;
 
 	//해당 이웃의 이웃 정보 가져오기
 	public List<SistFriendVO> gettheFofFriends(SistFriendVO fnd) throws Exception;

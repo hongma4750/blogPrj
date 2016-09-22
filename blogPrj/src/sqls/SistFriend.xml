@@ -19,6 +19,17 @@
     SELECT * FROM FRIEND WHERE FND_MYID=#{fnd_myid}
     </select>
     
+    <select id="get1FolFriends" parameterType="java.lang.String" 
+    resultType="sist.co.Model.SistFriendVO">
+    SELECT * FROM FRIEND WHERE FND_MYID=#{fnd_myid} AND FND_CHK=1
+    </select>
+    
+    <select id="get2FolFriends" parameterType="java.lang.String" 
+    resultType="sist.co.Model.SistFriendVO">
+    SELECT * FROM FRIEND WHERE FND_MYID=#{fnd_myid} AND FND_CHK=2
+    </select>
+    
+    
     <select id="gettheFofFriends" parameterType="sist.co.Model.SistFriendVO" 
     resultType="sist.co.Model.SistFriendVO">
     SELECT * FROM FRIEND WHERE FND_MYID IN (SELECT #{fnd_fndid} FROM FRIEND WHERE FND_MYID=#{fnd_myid})
