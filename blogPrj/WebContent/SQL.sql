@@ -25,7 +25,7 @@ insert into member values('aa1212','aa1212','aaaaa','m','20190705','aa','1001010
 select * from member;
 
 update member set m_action = 1 where m_id = 'aa1212';
-update member set m_action = 1 where m_id = 'b';
+update member set m_action = 1 where m_id = 'lovely4750';
 
 
 SELECT M_ID,M_NAME, M_GENDER, M_BIRTHDAY, M_EMAIL, M_PHONE, M_ACTION, M_LOGCHK, M_LOGDATE, M_FAILDATE, M_AUTH
@@ -36,7 +36,7 @@ SELECT M_ID,M_NAME, M_GENDER, M_BIRTHDAY, M_EMAIL, M_PHONE, M_ACTION, M_LOGCHK, 
 SELECT M_ID,M_NAME, M_GENDER, M_BIRTHDAY, M_EMAIL, M_PHONE,M_PHOTO, M_ACTION, M_AUTH
 	 	FROM MEMBER 
 	 	WHERE M_ID = 'b' AND M_PW = 'b' AND M_ACTION != 0	 	
-	 	
+	 	update member set m_action = 1 where m_id = 'aa1212';
 	 	
 --message
 
@@ -65,6 +65,7 @@ values
 (seq_message.nextval,'lovely4750','aa1212','안녕하세요1',sysdate,0,0,
 (select m_name from MEMBER where m_id = 'lovely4750'),
 (select m_photo from MEMBER where m_id = 'lovely4750'));
+
 
 
 insert into message 

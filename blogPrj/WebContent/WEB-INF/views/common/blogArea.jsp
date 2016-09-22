@@ -16,48 +16,54 @@
 <script src="js/bootstrap.min.js"></script>
 <!-- 부트스트랩 링크 -->
 
-<script src="js/angular/angular.js"></script>
+
 
 앙 블로그띠
 
-<c:forEach items="${newMyMessageList }" var="item">
-	<div ng-app="myApp">
-	    <div ng-controller="MainCtrl">
-	         {{ text }}<br>
-	         {{ text02 }}
-	         
-	    </div>
-	</div>
-</c:forEach>
+        <div ng-app="myApp">
+    <div class="inbox" ng-controller="EmailsCtrl">
+        My Inbox:
+        <ul>
+            <li ng-repeat="message in emails.messages">
+                <p>From: {{ message.from }}</p>
+                <p>Subject: {{ message.subject }}</p>
+                <p>{{ message.sent | date:'MMM d, y h:mm:ss a' }}</p>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+
+
 
 <script>
-var myApp = angular.module('myApp', []);
+	 
+	 var m_id = '${login.m_id}';
 
-var m_id = '${login.m_id}';
-var listSize = '${fn:length(newMyMessageList)}';
+	 if(m_id != " "){
+		 var myApp = angular.module('myApp', []);
+		 myApp.controller('EmailsCtrl', ['$scope', function ($scope) {
 
-if(m_id != " "){
-	alert("사이즈 : "+listSize);
+			    $scope.emails = {};
 
-	for(var j=0;j<listSize;j++){
-		
-		var list1 = new Array();
-		<c:forEach items="${newMyMessageList}" var="item1">
+			    $scope.emails.messages = [
+					<c:forEach items="${newMyMessageList}" var="item1">
+					    {
+					    	
+					    	
+					        "from": "${item1.message_sender}",
+					        "subject": "${item1.message_receiver}",
+					        "sent": "${item1.message_content}"
+					    },
+			    	</c:forEach>
+			    ];
+			    
+			}]);
+	 }
+	 </script>
 
-			myApp.controller('MainCtrl', ['$scope', function ($scope) {
-		    
-		    $scope.text = '${item1.message_sender}';
-		    $scope.text02 = '${item1.message_receiver}';
-		    
-		}]);
-		
-		</c:forEach>
-		
-		
-	}
-	
-}
 
-</script>
+
 
 

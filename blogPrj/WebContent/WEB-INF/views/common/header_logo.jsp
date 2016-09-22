@@ -17,7 +17,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <!-- 부트스트랩 링크 -->
-
+<script src="js/angular/angular.js"></script>
 
 
 <!-- asset CSS -->
@@ -217,8 +217,8 @@
 		<div id="temps">
 			<div style="width:100%; height:80%; " id="mymynoticeMessage" class="mymynoticeMessage">
 			
-				<c:forEach items="${newMyMessageList }" var="myMessage">
-				
+				<c:forEach items="${newMyMessageList }" var="myMessage"> 
+
 					<div class="list-group" style="margin:auto; padding:auto;">
 					  <a href="#" class="list-group-item ">
 					  	<span class="photo" style="maring:auto; padding:auto;">
@@ -228,18 +228,29 @@
 					  	<span class="subject">
 						    <span class="from">${myMessage.m_name } </span>
 			             </span>
-			             <span class="message">${myMessage.message_content }</span>
+			             <span class="message">${myMessage.message_content}</span>
 					  </a>
 					</div>
-					
+
+				
 				</c:forEach>
+				
+				
+ 
+
 	
 			</div>
 		</div>
+
+	
+	
+	
+	
+	
 		
 	</div>
 	
-	
+
 	<div style="width:100%; height:20%; background-color:skyblue">
 		<div class="row" style="width:100%; height:100%; padding:auto; margin:auto;">
 			<button class="btn btn-default" style="width:100%; height:100%;">see all message</button>
@@ -356,24 +367,7 @@ $('#userInfo').click(function(){
  
  function printNewNoticeMessage(){
 	 $("#mymynoticeMessage").remove();
-	 
-	  
-	 //$("#mymynoticeMessage").remove();
-	 
-	  /* var addDiv = "<div style='width:100%; height:80%;' id='mymynoticeMessage'>";
-	 addDiv += "<c:forEach items='${newMyMessageList}' var='myMessage'>";
-	 addDiv += "<div class='list-group' style='margin:auto; padding:auto;'>";
-	 addDiv += "<a href='#' class='list-group-item '>";
-	 addDiv += "<span class='photo' style='maring:auto; padding:auto;'>";
-	 addDiv += "<img alt='avatar' src='${myMessage.m_photo }' style='width:35px;height:40px;'>";
-	 addDiv += "</span>";
-	 addDiv += "<span class='subject'>";
-	 addDiv += "<span class='from'>${myMessage.m_name } </span>";
-	 addDiv += "</span>";
-	 addDiv += "<span class=;message;>${myMessage.message_content }</span>";
-	 addDiv += "</a></div></c:forEach></div>";
-	
-	$("#temps").html(addDiv); */
+
  }
 
  
