@@ -140,6 +140,9 @@ select* from friend
 insert into friend
 values(seq_friend.NEXTVAL, 'aa1212', 'summer', '친구들', 1,sysdate,0); 
 
+insert into friend
+values(seq_friend.NEXTVAL, 'aa1212', 'lovely4750', '친구들', 1,sysdate,0); 
+
 insert into fsetting values(seq_fsetting.NEXTVAL, 'bom', 0);
 
 insert into fgroup values(seq_fgroup.NEXTVAL, '친구들', 'aa1212',0);

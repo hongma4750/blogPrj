@@ -27,7 +27,7 @@
 	<div class="row"  style="display:inline-block; float:left;">
 	  <div class="col-sm-6 col-md-4">
 	    <div class="thumbnail">
-	      <img src="image/see.jpg" class="img-responsive" alt="Responsive image">
+	      <img src="${login.m_photo }" class="img-responsive" alt="Responsive image">
 	      <div class="caption">
 	        <p>...자기소개</p>
 	        <p><a href="bbswrite.do">포스트쓰기</a> &nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp; <a href="#none">관리</a></p>

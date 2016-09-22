@@ -85,5 +85,11 @@ values
 (select m_name from MEMBER where m_id = 'lovely4750'),
 (select m_photo from MEMBER where m_id = 'lovely4750'));
 
+insert into message 
+values
+(seq_message.nextval,'lovely4750','aa1212','안녕하세요5',sysdate,0,0,
+(select m_name from MEMBER where m_id = 'lovely4750'),
+(select m_photo from MEMBER where m_id = 'lovely4750'));
 
+select * from message;
 select * from message where message_receiver = 'aa1212' and message_read != 1;

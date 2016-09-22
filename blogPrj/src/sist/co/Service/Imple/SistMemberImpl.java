@@ -131,6 +131,11 @@ public class SistMemberImpl implements SistMemberService{
 		return sistMemberDAO.selectAllMessage(sm);
 	}
 
+	@Override
+	public void sendMessageAF(SistMessage sm) throws Exception {
+		sistMemberDAO.sendMessageAF(sm);
+	}
+
 	
 
 

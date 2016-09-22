@@ -46,6 +46,7 @@ public interface SistMemberService {
 	
 	List selectNewMessage(SistMessage sm) throws Exception;
 	
+	void sendMessageAF(SistMessage sm) throws Exception;
 	
 	
 	

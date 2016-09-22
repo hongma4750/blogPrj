@@ -214,25 +214,27 @@
 		
 		
 		<!-- 메세지 -->
-		<div style="width:100%; height:80%; ">
-		
-			<c:forEach items="${newMyMessageList }" var="myMessage">
+		<div id="temps">
+			<div style="width:100%; height:80%; " id="mymynoticeMessage" class="mymynoticeMessage">
 			
-				<div class="list-group" style="margin:auto; padding:auto;">
-				  <a href="#" class="list-group-item ">
-				  	<span class="photo" style="maring:auto; padding:auto;">
-				  		<img alt="avatar" src="${myMessage.m_photo }" style="width:35px;height:40px;">
-				  	</span>
-				  	
-				  	<span class="subject">
-					    <span class="from">${myMessage.m_name } </span>
-		             </span>
-		             <span class="message">${myMessage.message_content }</span>
-				  </a>
-				</div>
+				<c:forEach items="${newMyMessageList }" var="myMessage">
 				
-			</c:forEach>
-
+					<div class="list-group" style="margin:auto; padding:auto;">
+					  <a href="#" class="list-group-item ">
+					  	<span class="photo" style="maring:auto; padding:auto;">
+					  		<img alt="avatar" src="${myMessage.m_photo }" style="width:35px;height:40px;">
+					  	</span>
+					  	
+					  	<span class="subject">
+						    <span class="from">${myMessage.m_name } </span>
+			             </span>
+			             <span class="message">${myMessage.message_content }</span>
+					  </a>
+					</div>
+					
+				</c:forEach>
+	
+			</div>
 		</div>
 		
 	</div>
@@ -261,6 +263,7 @@ $('#userInfo').click(function(){
  /* 팝업 사라지는 자바 스크립트*/
  $(document).ready(function(){
 	 var myMessageCount = '${myMessageCount}';
+	 
 		var m_id = '${login.m_id}';
 		var checkNewMessage = false;
 		var checkNewMessageFiveCount = 0;
@@ -309,7 +312,17 @@ $('#userInfo').click(function(){
 				       			//기존 메세지 카운수랑 새로 체크해본 결과가 다르다
 				       			myMessageCount = checkMyNewMessage;
 				       			$("#messageCount").text(myMessageCount);
-				       			checkNewMessage = true;;
+				       			checkNewMessage = true;
+				       			
+				       			$.ajax({
+				       				type:"GET",
+				       				url:"changeNewMessage.do",
+				       				data:"m_id="+m_id,
+				       				
+				       				success : function(){
+				       					printNewNoticeMessage();
+				       				}
+				       			})
 				       		}
 				       		
 				       		
@@ -341,9 +354,30 @@ $('#userInfo').click(function(){
  
  /* 팝업 사라지는 자바 스크립트*/
  
- 
+ function printNewNoticeMessage(){
+	 $("#mymynoticeMessage").remove();
+	 
+	  
+	 //$("#mymynoticeMessage").remove();
+	 
+	  /* var addDiv = "<div style='width:100%; height:80%;' id='mymynoticeMessage'>";
+	 addDiv += "<c:forEach items='${newMyMessageList}' var='myMessage'>";
+	 addDiv += "<div class='list-group' style='margin:auto; padding:auto;'>";
+	 addDiv += "<a href='#' class='list-group-item '>";
+	 addDiv += "<span class='photo' style='maring:auto; padding:auto;'>";
+	 addDiv += "<img alt='avatar' src='${myMessage.m_photo }' style='width:35px;height:40px;'>";
+	 addDiv += "</span>";
+	 addDiv += "<span class='subject'>";
+	 addDiv += "<span class='from'>${myMessage.m_name } </span>";
+	 addDiv += "</span>";
+	 addDiv += "<span class=;message;>${myMessage.message_content }</span>";
+	 addDiv += "</a></div></c:forEach></div>";
+	
+	$("#temps").html(addDiv); */
+ }
 
  
+          
  
 </script>
 

@@ -102,4 +102,8 @@ public class SistMemberDAO {
 		return sqlSession.selectList(ns+"selectAllMessage",sm);
 	}
 	
+	public void sendMessageAF(SistMessage sm) throws Exception{
+		sqlSession.insert(ns+"sendMessageAF",sm);
+	}
+	
 }

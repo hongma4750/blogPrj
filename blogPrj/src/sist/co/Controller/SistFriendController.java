@@ -38,7 +38,7 @@ public class SistFriendController {
 		@RequestMapping(value="topiclist.do",method={RequestMethod.GET,RequestMethod.POST})
 		public String topiclist(Model model){
 			logger.info("환영합니다. topiclist.do 실행중");
-			return "index.tiles";
+			return "topiclist.tiles";
 		}
 		
 		//이웃 소식_전체

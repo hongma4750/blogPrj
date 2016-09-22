@@ -9,7 +9,6 @@ import java.security.KeyPairGenerator;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.spec.RSAPublicKeySpec;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.crypto.Cipher;
@@ -672,6 +671,58 @@ public class SistMemberController {
 		return checkMyNewMessage;
 
 	}
+	
+	
+	@RequestMapping(value="sendMessage.do",method={RequestMethod.GET,RequestMethod.POST})
+	public String sendMessage(HttpServletRequest request, Model model) throws Exception {
+		logger.info("sendMessage.do 실행중");
+		
+		String fndid = request.getParameter("fndid");
+		
+		System.out.println("fndid : "+fndid);
+		
+		SistMemberVO vo = new SistMemberVO();
+		vo.setM_id(fndid);
+		
+		SistMemberVO fndInfo = sistMemberService.selectId(vo);
+		
+		
+		model.addAttribute("fndInfo",fndInfo);
+		return "sendMessage.tiles";
+	}
+	
+	@RequestMapping(value="sendMessageAF.do",method={RequestMethod.GET,RequestMethod.POST})
+	public void sendMessageAF(SistMessage sm, Model model) throws Exception {
+		logger.info("sendMessageAF.do 실행중");
+		
+		System.out.println("sender : "+sm.getMessage_sender()+" , receiver : "+sm.getMessage_receiver());
+		
+		
+		sistMemberService.sendMessageAF(sm);
+		
+	}
+	
+	@RequestMapping(value="changeNewMessage.do", method=RequestMethod.GET)
+	@ResponseBody
+	public void changeNewMessage(HttpServletRequest request, SistMemberVO vo , Model model) throws Exception{
+		logger.info("checkNewMessage.do 이동중");
+		
+		SistMessage sm = new SistMessage();
+		sm.setMessage_receiver(request.getParameter("m_id"));
+		
+		System.out.println("id = "+vo.getM_id());
+		
+		int myMessageCount = sistMemberService.countMyMessage(sm);
+		//메세지 리스트
+		List<SistMessage> newMyMessageList = sistMemberService.selectNewMessage(sm);
+		
+		//세션에 등록		--> 이후 매초마다 새로운걸로 갱신해야됨
+		request.getSession().setAttribute("myMessageCount", myMessageCount);
+		request.getSession().setAttribute("newMyMessageList", newMyMessageList);
+	}
+	
+	
+	
 	
 
 	

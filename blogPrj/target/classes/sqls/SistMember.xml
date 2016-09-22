@@ -81,13 +81,21 @@
   	</select>
   	
   	<select id="selectNewMessage" parameterType="sist.co.Model.SistMessage" resultType="sist.co.Model.SistMessage">
-  		SELECT * FROM MESSAGE WHERE MESSAGE_RECEIVER = #{message_receiver} AND MESSAGE_READ != 1 AND MESSAGE_DEL != 1
+  		SELECT * FROM MESSAGE WHERE MESSAGE_RECEIVER = #{message_receiver} AND MESSAGE_READ != 1 AND MESSAGE_DEL != 1 
+  		ORDER BY MESSAGE_SEQ DESC
   	</select>
   	
   	
   	<select id="selectAllMessage" parameterType="sist.co.Model.SistMessage" resultType="sist.co.Model.SistMessage">
   		SELECT * FROM MESSAGE WHERE MESSAGE_RECEIVER = #{message_receiver} AND MESSAGE_DEL != 1
   	</select>
+  	
+  	<insert id="sendMessageAF" parameterType="sist.co.Model.SistMessage">
+  		INSERT INTO MESSAGE VALUES (seq_message.nextval,#{message_sender},#{message_receiver},
+  		#{message_content},sysdate,0,0,
+  		(select m_name from member where m_id=#{message_sender}),
+  		(select m_photo from member where m_id=#{message_sender}))
+  	</insert>
   	
   	
   	

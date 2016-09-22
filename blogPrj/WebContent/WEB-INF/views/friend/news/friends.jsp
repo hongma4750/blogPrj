@@ -53,7 +53,8 @@
     </c:if>
   </td>
   <td>${fl.fnd_fndid } | 블로그명</td>
-  <td><button type="button" class="glyphicon glyphicon-pencil"></button></td>
+  
+  <td><button type="button" class="glyphicon glyphicon-pencil" onclick="sendMessage('${fl.fnd_fndid}')"></button></td>
 </tr>
 </c:forEach>
 </c:if>
@@ -71,4 +72,22 @@
 $(function () {
     $('#myTab a:first').tab('show')
 });
+
+function sendMessage(a){
+	   var popUrl = "sendMessage.do?fndid="+a;   //팝업창에 출력될 페이지 URL
+	   
+	   
+	   var w = 370;
+	   var h = 400;
+	   
+	   var LeftPosition=(screen.width-w)/2;		//화면의 가로
+	   var TopPosition=(screen.height-h)/2;		//화면의 세로
+	   
+	   
+	   var popOption = "width=370, height=400, resizable=no, scrollbars=no, status=no,top="+TopPosition+",left="+LeftPosition;    //팝업창 옵션(optoin)
+	   
+	      window.open(popUrl,"메세지보내기",popOption);
+	}
+	
+	
 </script>
