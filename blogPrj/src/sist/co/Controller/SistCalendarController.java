@@ -38,6 +38,9 @@ public class SistCalendarController {
 		
 		mycal.calculate();
 		
+		// 클릭한 날짜 값 취득
+		// 우선 url에 있는 날짜 값을 calendar.jsp에서 찍어서 확인한다 그 후에 안되면 여기서 날짜 넘기는 값 다시 전달해서 datepicker 세팅한다.
+		
 		// 자신의 정보 취득
 		String id = ((SistMemberVO)request.getSession().getAttribute("login")).getM_id();
 				
@@ -161,7 +164,7 @@ public class SistCalendarController {
 		return "forward:/calendar.do"; 
 	}
 	
-	/* 일정  수정 */
+	/* 일정  수정 -> detail 겸 수정페이지가 한 몸임 */
 	@RequestMapping(value="sch_detail.do", 
 			method={RequestMethod.GET, RequestMethod.POST})
 	public String sch_detail(HttpServletRequest request, Model model)throws Exception{
@@ -188,6 +191,52 @@ public class SistCalendarController {
 		return "redirect:/sch_detail.tiles"; 
 	}
 	
+	
+	/* 일정  수정 after */
+	@RequestMapping(value="sch_updateAf.do", 
+			method={RequestMethod.GET, RequestMethod.POST})
+	public String sch_updateAf(HttpServletRequest request, Model model, SistCalendarParam calparam, SistCalendarDTO sdto)throws Exception{
+		logger.info("CalendarController sch_updateAf.do " + new Date());
+		
+		// 일정 글 번호 취득
+		String getSch_writenum= request.getParameter("sch_writenum");
+		int num = Integer.parseInt(getSch_writenum);
+		System.out.println("수정ㅇ된 ㄴ벌호:"+num);
+		
+		String SyyyyMmdd = CalendarUtil.yyyymmdd(calparam.getSyear(), calparam.getSmonth(), calparam.getSday());
+		String EyyyyMmdd = CalendarUtil.yyyymmdd(calparam.getEyear(), calparam.getEmonth(), calparam.getEday());
+		
+		sdto.setSch_startdate(SyyyyMmdd);
+		sdto.setSch_enddate(EyyyyMmdd);
+		
+		sistCalendarService.updateSchedule(sdto);
+		System.out.println("자료는 " + sdto.toString());
+	
+		model.addAttribute("year", calparam.getYear());
+		model.addAttribute("month", calparam.getMonth());
+		
+		int year = calparam.getSyear();
+		int months = calparam.getSmonth();
+		
+		
+		return "redirect:/calendar.do?year="+year+"&month="+months; 
+	}
+	
+	/* 일정 삭제 */
+	@RequestMapping(value="sch_delete.do", 
+			method={RequestMethod.GET, RequestMethod.POST})
+	public String sch_delete(HttpServletRequest request, SistCalendarParam calparam)throws Exception{
+		logger.info("CalendarController sch_delete.do ");
+		
+		String year= request.getParameter("syear");
+		String month= request.getParameter("smonth");
+		
+		String getSch_writenum= request.getParameter("sch_writenum");
+		int sch_writenum = Integer.parseInt(getSch_writenum);
+		sistCalendarService.deleteSchedule(sch_writenum);
+		
+		return "redirect:/calendar.do?year="+year+"&month="+month; 
+	}
 	
 	
 	// 설정 페이지 이동

@@ -18,7 +18,6 @@
 <script src="js/bootstrap.min.js"></script>
 <!-- 부트스트랩 링크 -->
 
-
 <!-- date picker -->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
@@ -27,29 +26,12 @@
 <!-- 달력 쓰기에 필요함 -->
 <%@page import="sist.co.help.myCal"%>
 <%@page import="java.util.Calendar"%>
-<%--
+
 <%!
  public String two (String msg){
 	return msg.trim().length() < 2 ? "0"+msg : msg.trim(); 
 }
 %>
-
-<%
-myCal mycal = (myCal)request.getAttribute("mycal");
-
-String year = "" + mycal.getYear();
-String month = "" + mycal.getMonth();
-String day = "" + mycal.getDay();
-
-Calendar cal = Calendar.getInstance();
-
-int tyear = cal.get(Calendar.YEAR);
-int tmonth = cal.get(Calendar.MONTH) + 1;
-int tday = cal.get(Calendar.DATE);
-int thour = cal.get(Calendar.HOUR_OF_DAY);	//24시간
-int tmin = cal.get(Calendar.MINUTE);
-%>
-
 
 <script>
 $.datepicker.setDefaults({
@@ -67,9 +49,20 @@ $.datepicker.setDefaults({
 /* date picker */
 $(function(){
 	$("#datepicker1, #datepicker2").datepicker();
-}); --%>
+});
 
-<script>
+
+//종일 체크
+$(function (){
+	var allday_chk = $("#allday_chk1").val();
+	if( allday_chk == 1) {
+		$(".allday_chk").prop("checked", true);
+		$(".time_selectbox-source").attr("disabled", true);
+		$(".time_selectbox-source").attr("class", "time_selectbox-source-disabled");
+	}
+});
+
+
 /* 종일 클릭 시*/
 $(function(){
 	 $(".allday_chk").click(function(){
@@ -88,6 +81,72 @@ $(function(){
 
 </script>
 <script>
+//날짜 값 받아와서 설정
+$(function (){
+	var ssyear = $('#get_sdate').val().substring(0,4);
+	var ssmonth = $('#get_sdate').val().substring(4,6);
+	var ssday = $('#get_sdate').val().substring(6,11);
+	var sdates =  ssyear+"-"+ssmonth+"-"+ssday;
+	
+	$("#datepicker1").datepicker("setDate",sdates);
+
+	var eeyear = $('#get_edate').val().substring(0,4);
+	var eemonth = $('#get_edate').val().substring(4,6);
+	var eeday = $('#get_edate').val().substring(6,11);
+	var edates =  eeyear+"-"+eemonth+"-"+eeday;
+	$("#datepicker2").datepicker("setDate",edates);
+});
+
+
+/* 저장할 때 날짜 값 전달 */
+window.onload = function(){
+$("#save").click(function(){
+
+	var syear = $('#datepicker1').val().substring(0,4);
+	var smonth = $('#datepicker1').val().substring(5,7);
+	var sday = $('#datepicker1').val().substring(8,11);
+
+	$('#syear').val(syear);
+	$('#smonth').val(smonth);
+	$('#sday').val(sday);
+	
+	var eyear = $('#datepicker2').val().substring(0,4);
+	var emonth = $('#datepicker2').val().substring(5,7);
+	var eday = $('#datepicker2').val().substring(8,11);
+
+	$('#eyear').val(eyear);
+	$('#emonth').val(emonth);
+	$('#eday').val(eday);
+	
+	
+	if($('#start_time').attr("disabled")){
+		$('#start_time').removeAttr('disabled');
+		$('#end_time').removeAttr('disabled');
+		$("#start_time option").val("종일");
+		$("#end_time option").val("종일");
+	}
+	
+	})
+	
+}; 
+
+//중요 체크
+$(function (){
+	var imp_chk = $("#important_chk1").val();
+	if( imp_chk == 1) {
+		$("#important_chk").prop("checked", true);
+	}
+});
+
+
+//완료 체크
+$(function (){
+	var fin_chk = $("#complete_chk1").val();
+	if( fin_chk == 1) {
+		$("#complete_chk").prop("checked", true);
+	}
+});
+
 // 알림 val 받아오기 
 $(function () {
 var sel_ca_seqs = $("#sel_alerms").val();
@@ -119,10 +178,17 @@ for(var i = 0; i < $("#end_time option").size(); i++ ){
 	}
 
 });
+
+// 삭제 클릭시
+$(function (){
+	$("#delbtn").click(function(){
+		alert("일정을 삭제하시겠습니까?");
+	})
+})
 </script>
 
 <div id="section_cen">
-<form action="sch_update.do" method="post">
+<form action="sch_updateAf.do?sch_writenum=${scal.sch_writenum}" method="post">
 	
 	<!-- 헤더 시작 -->
 	<div class="sch_header">
@@ -136,10 +202,10 @@ for(var i = 0; i < $("#end_time option").size(); i++ ){
 		</tr>
 		<tr>
 			<td colspan="2" height="47px">
-				<button type="submit" class="save_btn" >
+				<button type="submit" class="save_btn" id="save">
 					<strong>저장</strong>
 				</button>
-				<button type="button" class="save_btn" >
+				<button type="button" id="delbtn" class="save_btn" onclick="location.href='sch_delete.do?sch_writenum=${scal.sch_writenum}&syear=${fn:substring(scal.sch_startdate, 0, 4)}&smonth=${fn:substring(scal.sch_startdate, 4, 6)}'">
 					<strong>일정삭제</strong>
 				</button>
 			</td>
@@ -168,18 +234,23 @@ for(var i = 0; i < $("#end_time option").size(); i++ ){
 			</div>
 			
 			<div class="important_chk" style="display: inline;">
+			<!-- 나중에 다시 확인 -->
+			<input type="hidden" id="important_chk1" value="${scal.sch_star }"/>
 				<span>
-				<c:if test="${scal.sch_star eq 1 }">
-					<input type="checkbox" name="sch_star" id="important_chk" value="${scal.sch_star }" checked="checked" style="display: inline-block;">
-				</c:if>	
-					<input type="checkbox" name="sch_star" id="important_chk" value="1" checked="" style="display: inline-block;">
+					<input type="checkbox" name="sch_star" id="important_chk" value="1" style="display: inline-block;">
 					<label for="important_chk">중요</label>
 				</span> 
+			
+			<input type="hidden" id="complete_chk1" value="${scal.sch_finish }"/>
+				<span>
+					<input type="checkbox" name="sch_finish" id="complete_chk" value="1" style="display: inline-block;">
+					<label for="important_chk">완료</label>
+				</span> 	
+				
 			</div>
 		</td>				
 	</tr>
 	<!-- 제목 끝 -->
-	
 	
 	<!-- 장소 시작 -->
 	<tr>
@@ -203,11 +274,15 @@ for(var i = 0; i < $("#end_time option").size(); i++ ){
             	<option value="1">음력</option>
         	</select>
         	
-      <%-- 
-        	<input type="text" id="datepicker1" class="date_input" name="sch_stardate" value="${scal.sch_startdate }">
-			<input type="hidden" name="syear" value="<%=tyear %>">
-			<input type="hidden" name="smonth" value="<%=month %>">
-			<input type="hidden" name="sday" value="<%=tday %>"> --%>
+     
+     		<!-- 날짜 값 받아옴 -->
+      		<input type="hidden" id="get_sdate" value="${scal.sch_startdate }">  <!-- sch_startdate 있는 값을 전달해야함 따로 붙ㄴ여서 전달,,,,,,,, -->
+      		
+        	<input type="text" id="datepicker1" class="date_input" name="sch_stardate">
+			 
+			<input type="hidden" id="syear" name="syear" value="">
+			<input type="hidden" id="smonth" name="smonth" value="">
+			<input type="hidden" id="sday" name="sday" value="">
 			
 			<div class="selectbox13" data-lang-am="오전" data-lang-pm="오후" data-alert="형식에 맞게 입력해주세요
 			예) 1230, 3:10, 오후 2시">
@@ -267,10 +342,14 @@ for(var i = 0; i < $("#end_time option").size(); i++ ){
     		<span class="bar">  -  </span>
     		
     		
-    		<%-- <input type="text" id="datepicker2" class="date_input" name="sch_enddate" value="${scal.sch_endtdate }">
-			<input type="hidden" name="eyear" value="<%=tyear %>">
-			<input type="hidden" name="emonth" value="<%=month %>">
-			<input type="hidden" name="eday" value="<%=tday %>"> --%>
+    		<!-- 날짜 값 받아옴 -->
+      		<input type="hidden" id="get_edate" value="${scal.sch_enddate }"> 
+      		
+    		<input type="text" id="datepicker2" class="date_input" name="sch_enddate">
+			
+			<input type="hidden" name="eyear" id="eyear">
+			<input type="hidden" name="emonth" id="emonth">
+			<input type="hidden" name="eday" id="eday">
 			
 			
 			
@@ -330,12 +409,11 @@ for(var i = 0; i < $("#end_time option").size(); i++ ){
 		</div>
 		
 		<span>
-			<c:if test="${scal.sch_allday eq 1 }">
-				<input type="checkbox" name="sch_allday" class="allday_chk" style="display: inline-block;" value="1" checked="checked">
-			</c:if>	
+		<!-- 나중에 다시 확인 -->
+		<input type="hidden" id="allday_chk1" value="${scal.sch_allday }"/>
 			
 			<input type="checkbox" name="sch_allday" class="allday_chk" style="display: inline-block;" value="1">
-			<label for="important_chk">종일</label>
+			<label for="allday_chk">종일</label>
 		</span>
 		
     	</td>
@@ -1034,6 +1112,9 @@ for(var i = 0; i < $("#end_time option").size(); i++ ){
 					      <div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 						<button type="button" class="btn btn-primary">저장</button>
+						
+						
+						
 					      </div>
 					    </div>
 					  </div>
@@ -1091,25 +1172,24 @@ for(var i = 0; i < $("#end_time option").size(); i++ ){
 		</td>
     </tr>
     <!-- 알림 끝-->
-    
-    <tr>
+</table>
+	
+</div>
+<!-- <table>
+	 <tr>
     	<td colspan="9">
     	
-    		<button type="submit" class="save_btn" >
-				<em></em>
-				<strong>저장</strong>
-			</button>
-			
-			<button type="button" class="save_btn" >
-				<em></em>
-				<strong>취소</strong>
-			</button>
+    		
+				<button type="submit" class="save_btn" id="save">
+					<strong>저장</strong>
+				</button>
+				<button type="button" class="save_btn" >
+					<strong>일정삭제</strong>
+				</button>
+		
     	</td>
     </tr>
-	</table>
-	
-	</div>
-	
+</table> -->
 </form>
 </div>
 <script>

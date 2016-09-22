@@ -57,8 +57,23 @@ WHERE RN BETWEEN 1 AND 5
 		SYSDATE, #{sch_allday}, #{sch_public}, #{sch_sticker}, #{sch_content}, 
 		#{sch_docname}, #{sch_alarm}
 		)
-
 </insert>
 
+<!-- 일정 수정 -->
+<update id="updateSchedule" parameterType="sist.co.Model.SistCalendarDTO">
+	UPDATE SCHWRITE SET
+		SCH_TITLE=#{sch_title}, SCH_STAR=#{sch_star}, 
+		SCH_LOCATION=#{sch_location}, SCH_STARTDATE=#{sch_startdate}, 
+		SCH_STARTTIME=#{sch_starttime}, SCH_ENDDATE=#{sch_enddate}, 
+		SCH_ENDTIME=#{sch_endtime},  SCH_RDATE= SYSDATE, 
+		SCH_ALLDAY=#{sch_allday}, SCH_PUBLIC=#{sch_public}, 
+		SCH_STICKER=#{sch_sticker}, SCH_CONTENT=#{sch_content},
+		SCH_DOCNAME=#{sch_docname}, SCH_ALARM=#{sch_alarm}, SCH_FINISH=#{sch_finish}
+	WHERE SCH_WRITENUM=#{sch_writenum}
+</update>
 
+<!-- 일정 삭제 -->
+<delete id="deleteSchedule" parameterType="java.lang.Integer">
+	DELETE SCHWRITE WHERE SCH_WRITENUM=#{sch_writenum}
+</delete>
 </mapper>

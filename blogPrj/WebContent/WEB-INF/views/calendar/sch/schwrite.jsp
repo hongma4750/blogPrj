@@ -24,6 +24,7 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 
+
 <!-- 달력 쓰기에 필요함 -->
 <%@page import="sist.co.help.myCal"%>
 <%@page import="java.util.Calendar"%>
@@ -70,38 +71,60 @@ $(function(){
 	$("#datepicker1, #datepicker2").datepicker();
 });
 
-/* 오늘 날짜로 설정 */
-$(function() { 
-     $('#datepicker1').val($.datepicker.formatDate($.datepicker.ATOM, new Date())); 
-     $('#datepicker2').val($.datepicker.formatDate($.datepicker.ATOM, new Date())); 
-});
-
-/* 날짜 값 전달 */
-$(function(){
-	$('#datepicker1').val();
-	var syear = $('#datepicker1').val().substring(0,4);
-	var smonth = $('#datepicker1').val().substring(5,7);
-	var sday = $('#datepicker1').val().substring(8,11);
+/* 기본으로 오늘 날짜로 설정 */
+$(function() {  
 	
-	$('#syear').val(syear);
-	$('#smonth').val(smonth);
-	$('#sday').val(sday);
+	$('#datepicker1').val($.datepicker.formatDate($.datepicker.ATOM, new Date())); 
+    $('#datepicker2').val($.datepicker.formatDate($.datepicker.ATOM, new Date())); 
+     
 });
-
+    	
 /* 종일 클릭 시*/
 $(function(){
 	 $(".allday_chk").click(function(){
 		
 	if($(".allday_chk").is(":checked")){
-		$(".time_selectbox-source").attr("disabled", true);
+		$("#start_time").attr("disabled", true);
 		$(".time_selectbox-source").attr("class", "time_selectbox-source-disabled");
+		
 		}else{
-			$(".time_selectbox-source-disabled").attr("disabled", false);
+			$("#start_time").attr("disabled", false);
 			$(".time_selectbox-source-disabled").attr("class", "time_selectbox-source");
 		}
 	});
 	
 });
+
+
+/* 저장할 때 날짜 값 전달 */
+window.onload = function(){
+$("#save").click(function(){
+
+	var syear = $('#datepicker1').val().substring(0,4);
+	var smonth = $('#datepicker1').val().substring(5,7);
+	var sday = $('#datepicker1').val().substring(8,11);
+
+	$('#syear').val(syear);
+	$('#smonth').val(smonth);
+	$('#sday').val(sday);
+	
+	var eyear = $('#datepicker2').val().substring(0,4);
+	var emonth = $('#datepicker2').val().substring(5,7);
+	var eday = $('#datepicker2').val().substring(8,11);
+
+	$('#eyear').val(eyear);
+	$('#emonth').val(emonth);
+	$('#eday').val(eday);
+	
+	
+	if($('#start_time').attr("disabled")){
+		$('#start_time').removeAttr('disabled');
+		$("#start_time option").val("종일");
+		$("#end_time option").val("종일");
+	}
+	})
+	
+}; 
 
 
 </script>
@@ -184,7 +207,6 @@ $(function(){
         	
       
         	<input type="text" id="datepicker1" class="date_input" name="sch_stardate" value="">
-
 			<input type="hidden" id="syear" name="syear" value="">
 			<input type="hidden" id="smonth" name="smonth" value="">
 			<input type="hidden" id="sday" name="sday" value="">
@@ -192,7 +214,7 @@ $(function(){
 			<div class="selectbox13" data-lang-am="오전" data-lang-pm="오후" data-alert="형식에 맞게 입력해주세요
 			예) 1230, 3:10, 오후 2시">
         
-    			<select id="start_time" name='sch_starttime' class="time_selectbox-source"  >
+    			<select id="start_time" name='sch_starttime' class="time_selectbox-source">
 					<option value="오전 12:00">오전 12:00</option>
 					<option value="오전 12:30">오전 12:30</option>
 					<option value="오전 01:00">오전 01:00</option>
@@ -247,10 +269,10 @@ $(function(){
     		<span class="bar">  -  </span>
     		
     		
-    		<input type="text" id="datepicker2" class="date_input" name="sch_enddate" value="<%=tyear%>.<%=two(month+"")%>.<%=two(tday+"")%>">
-			<input type="hidden" name="eyear" value="<%=tyear%>">
-			<input type="hidden" name="emonth" value="12">
-			<input type="hidden" name="eday" value="12">
+    		<input type="text" id="datepicker2" class="date_input" name="sch_enddate">
+			<input type="hidden" name="eyear" id="eyear">
+			<input type="hidden" name="emonth" id="emonth">
+			<input type="hidden" name="eday" id="eday">
 			
 			
 			
@@ -1070,7 +1092,7 @@ $(function(){
     <tr>
     	<td colspan="9">
     	
-    		<button type="submit" class="save_btn" >
+    		<button type="submit" class="save_btn" id="save">
 				<em></em>
 				<strong>저장</strong>
 			</button>

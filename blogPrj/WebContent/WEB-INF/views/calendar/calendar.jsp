@@ -42,6 +42,8 @@ function showallcust(num) {
 	});	
 }
 
+alert(year)
+
 </script>
 
 
@@ -393,7 +395,7 @@ for(int i=1;i <= lastDayOfMonth; i++){
 	String hhh=String.format(
 			"<a href='%s?year=%d&month=%d&day=%d'>"+
 			"<img src='image/pen.gif' alt='write'/></a>",
-				"calwrite.do", year, month, i);
+				"schwrite.do", year, month, i);
 	
 	if((i+dayOfweek-1)%7==0){		// 토요일일 경우
 		%>

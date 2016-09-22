@@ -39,5 +39,19 @@ public class SistCalendarImpl implements SistCalendarService{
 		return sistCalendarDAO.writeSchedule(sdto);
 	}
 
+	/* 일정 수정 */
+	@Override
+	public void updateSchedule(SistCalendarDTO sdto) throws Exception {
+		sistCalendarDAO.updateSchedule(sdto);		
+	}
+
+	/* 일정 삭제 */
+	@Override
+	public void deleteSchedule(int sch_writenum) throws Exception {
+		sistCalendarDAO.deleteSchedule(sch_writenum);
+	}
+
+	
+	
 
 }

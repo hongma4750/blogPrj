@@ -1,27 +1,3 @@
-DROP TABLE member
-CASCADE CONSTRAINT;
-
-create table member(
-	
-	m_id varchar2(50) primary key,			-- 아이디
-	m_pw varchar2(50) not null,			-- 비밀번호
-	m_name varchar2(50) not null,
-	m_gender varchar2(2) not null,
-	m_birthday varchar2(12) not null,
-	m_email varchar2(50) not null,		-- 이메일
-	m_phone varchar2(50) not null,		-- 전화번호
-	
-	m_action number default 0,		-- 인증
-	m_logchk number default 0, 		-- 로그인 실패 카운트
-	m_logdate date,			-- 로그인 한 날
-	m_faildate date,			-- 로그인 실패했을 때, 시간 입력
-	M_AUTH number default 3
-);
-
-insert into member values ('d','d','디디슬','1','dd@i.com','19931026','010-0818', 0, 0, sysdate, sysdate, 3)
-insert into member values ('bae','b','배','1','dd@i.com','19931026','010-0818', 0, 0, sysdate, sysdate, 3)
-insert into member values ('cae','c','새','1','dd@i.com','19931026','010-0818', 0, 0, sysdate, sysdate, 3)
-------------------------------------------------------------------
 DROP TABLE SCHWRITE
 CASCADE CONSTRAINT;
 
@@ -31,14 +7,14 @@ CREATE TABLE SCHWRITE(
 	sch_writenum number primary key,		-- seq
 	sch_id varchar2(50) not null,			-- 작성자 이름
 	sch_title varchar2(50) not null,		-- 캘린더 제목,
-	sch_star number,				-- 매우중요:2, 보통중요:1, 안중요:1
+	sch_star number,						-- 매우중요:2, 보통중요:1, 안중요:1
 	sch_location varchar2(50),				-- 장소
 	sch_startdate varchar2(50) not null,	-- 시작날짜 입력
 	sch_starttime varchar2(50),				-- 시작시간 입력 
 	sch_enddate varchar2(50) not null,		-- 끝날짜 입력
 	sch_endtime varchar2(50),				-- 끝시간 입력
 	sch_rdate varchar2(50) not null,		-- 등록하는 날짜 입력
-	sch_allday number,			-- 종일이면 1, 안 종일:0
+	sch_allday number,						-- 종일이면 1, 안 종일:0
 	--sch_member varchar2(50),				-- 초대하는 친구
 	sch_public number,						-- 공개:0, 비공개:1
 	sch_sticker varchar2(150),				-- 스티커 이름
@@ -129,6 +105,22 @@ START WITH 1 INCREMENT BY 1;
 ALTER TABLE SCH_INVITE
 ADD CONSTRAINT FK_SIST_SCH_INVITE FOREIGN KEY(invite_id)
 REFERENCES member(M_id);  
+
+
+
+
+
+
+
+UPDATE SCHWRITE 
+SET SCH_TITLE ='이잇', SCH_STAR=1,
+SCH_LOCATION='이잇', SCH_STARTDATE='20160909',
+SCH_STARTTIME='오후 09:00', SCH_ENDDATE='20160909',
+SCH_ENDTIME='오후 09:00', SCH_RDATE= SYSDATE,
+SCH_ALLDAY=0, SCH_PUBLIC=0,
+SCH_STICKER='없음', SCH_CONTENT='흐흐흐흐흐흐흫',
+SCH_DOCNAME='없음', SCH_ALARM='30M', SCH_FINISH=1 WHERE SCH_WRITENUM=1;
+
 
 
 ------------------------------------------------------------------------------

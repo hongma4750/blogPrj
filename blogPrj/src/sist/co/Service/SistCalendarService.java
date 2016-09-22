@@ -16,4 +16,10 @@ public interface SistCalendarService {
 	
 	/* 일정 쓰기 */
 	public boolean writeSchedule(SistCalendarDTO sdto) throws Exception;
+	
+	/* 일정 수정 */
+	public void updateSchedule(SistCalendarDTO sdto) throws Exception;
+	
+	/* 일정 삭제 */
+	public void deleteSchedule(int sch_writenum) throws Exception;
 }

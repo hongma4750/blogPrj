@@ -41,7 +41,15 @@ public class SistCalendarDAO {
 		return true;
 	}
 	
-	/* 일정 상세보기 */
+	/* 일정 수정 */
+	public void updateSchedule(SistCalendarDTO sdto) throws Exception{
+		sqlSession.update(ns+"updateSchedule", sdto);
+	}
+	
+	/* 일정 삭제 */
+	public void deleteSchedule(int sch_writenum) throws Exception{
+		sqlSession.delete(ns+"deleteSchedule", sch_writenum);
+	}
 	
 	
 }
