@@ -377,9 +377,8 @@ public class SistFriendController {
 			String sseq=request.getParameter("seq");
 			int seq=Integer.parseInt(sseq);
 			System.out.println(seq);
+			String gname = request.getParameter("fnd_groupname");
 			
-			//그룹명
-			String gname=request.getParameter("gname");
 			
 			//수락
 			sistFriendService.acceptDblFols(seq);

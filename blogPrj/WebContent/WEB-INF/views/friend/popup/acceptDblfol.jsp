@@ -37,7 +37,7 @@ String seq=request.getParameter("seq");%>
 
 			<div style="float: left;">그룹선택&nbsp;</div>
 
-			<select id="_selgroup" name="groupname"
+			<select id="_selgroup" name="fnd_groupname"
 				class="form-control input-sm" style="width: 200px; float: left;">
 				<c:forEach items="${glist }" var="gl">
 					<option value="${gl.fg_groupname }">${gl.fg_groupname }</option>
@@ -65,7 +65,7 @@ String seq=request.getParameter("seq");%>
 
 	<div align="center">
 		<button type="button" class="btn btn-default btn-sm"
-			onclick="popupNext();">다음</button>
+			id="_Ok" onclick="popupNext();">다음</button>
 		<button type="button" class="btn btn-default btn-sm"
 			onclick="popupClose();">취소</button>
 	</div>
@@ -78,9 +78,12 @@ function popupClose(){
 
 
 //서로이웃승낙팝업으로 이동
-function popupNext(){
+<%-- function popupNext(){
 	location.href="acceptSucs.do?blogId=<%=blogId %>&seq=<%=seq%>";
-}
+} --%>
+$("#_Ok").click(function name(){
+	$("#_myform").attr({"target":"_self", "action":"acceptSucs.do"}).submit();	
+});
 
 //그룹추가 버튼클릭시 그룹생성 영역 생김
 function newgroup(){
