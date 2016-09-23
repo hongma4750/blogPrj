@@ -52,9 +52,14 @@
 			
 			<c:if test="${not empty Rfolist }">
 			
+			
+			
 			<form name="frmForm2" id="_frmForm2" action="acceptDblfol.do" target="pop" method="post">
 			
 			<c:forEach items="${Rfolist }" var="Rfl">
+			
+			<!-- 미확인만 보이기 -->
+			<c:if test="${Rfl.df_accept==0 }">
 			
 			<tr>
 				<td><input type="checkbox" id="_chk"></td>
@@ -66,6 +71,9 @@
 			
 			<input type="hidden" id="_seq" name="seq" value="${Rfl.df_seq }" />
 			<input type="hidden" name="blogId" value="${Rfl.df_send }" />
+			
+			</c:if>
+			<!-- 미확인만 보이기 -->
 			
 			</c:forEach>
 			

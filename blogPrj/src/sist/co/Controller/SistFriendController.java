@@ -404,7 +404,7 @@ public class SistFriendController {
 			
 			//거절(팔로잉 거절)
 			
-			return "redirect:/f_receive.tiles";
+			return "redirect:/f_receive.do";
 		}
 		
 		//서로이웃신청 거절
