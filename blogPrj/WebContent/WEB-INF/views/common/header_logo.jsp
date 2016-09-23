@@ -309,7 +309,17 @@ $('#userInfo').click(function(){
 				       			//기존 메세지 카운수랑 새로 체크해본 결과가 다르다
 				       			myMessageCount = checkMyNewMessage;
 				       			$("#messageCount").text(myMessageCount);
-				       			checkNewMessage = true;;
+				       			checkNewMessage = true;
+				       			
+				       			$.ajax({
+				       				type:"GET",
+				       				url:"changeNewMessage.do",
+				       				data:"m_id="+m_id,
+				       				
+				       				success : function(){
+				       					printNewNoticeMessage();
+				       				}
+				       			})
 				       		}
 				       		
 				       		
@@ -335,9 +345,15 @@ $('#userInfo').click(function(){
 		       
 		    }, 1000);	//5초
 		  });
- 
- 
+
+
 	 });
+
+/* 팝업 사라지는 자바 스크립트*/
+
+function printNewNoticeMessage(){
+	 //$("#mymynoticeMessage").remove();
+}
  
  /* 팝업 사라지는 자바 스크립트*/
  
