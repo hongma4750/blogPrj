@@ -42,6 +42,8 @@ function showallcust(num) {
 	});	
 }
 
+alert(year)
+
 </script>
 
 
@@ -225,12 +227,12 @@ public String makeTable(int year, int month, int day, List<SistCalendarDTO> scdt
 	String s = "";
 	String dates = (year+"")+two(month+"")+two(day+"");
 	s = "<table>";
-	s += "<col width='300%'/>";
+	s += "<col width='120px'/>";
 	
 	for(SistCalendarDTO scd : scdto){
 		// 여기 다시 짚기
 		if(scd.getSch_startdate().substring(0, 8).equals(dates)){ 
-			s += "<tr bgcolor='pink'>";
+			s += "<tr bgcolor='white'>";
 			s += "<td>";
 			String num = scd.getSch_writenum()+"";
 			/* s += "<a href='sch_quick_view.do?sch_writenum="+num+"' class='sch_quick_view' >";  */
@@ -238,8 +240,13 @@ public String makeTable(int year, int month, int day, List<SistCalendarDTO> scdt
 			/* s += "<a href='#' class='sch_quick_view' onclick='showallcust("+num+")'>";	// 시퀀스 번호 전달 */
 			
 			s += "<a href='sch_update.do?sch_writenum="+num+"' class='sch_quick_view'>"; 
-			s += "<font style='font-size:8px; color:#4984d9'>";
-			s += scd.getSch_starttime();
+			s += "<font style='font-size:13px; color:#2769d4'>";
+			s += "<strong>";
+			s += scd.getSch_starttime()+"  ";
+			s += "</strong>";
+			s += "</font>";
+			s += "<font style='font-size:13px; color:#4984d9'>";
+			
 			s += omit(scd.getSch_title());
 			s += "</font>";
 			s += "</a>";
@@ -393,7 +400,7 @@ for(int i=1;i <= lastDayOfMonth; i++){
 	String hhh=String.format(
 			"<a href='%s?year=%d&month=%d&day=%d'>"+
 			"<img src='image/pen.gif' alt='write'/></a>",
-				"calwrite.do", year, month, i);
+				"schwrite.do", year, month, i);
 	
 	if((i+dayOfweek-1)%7==0){		// 토요일일 경우
 		%>

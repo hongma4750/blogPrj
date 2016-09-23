@@ -133,8 +133,8 @@
 	<definition name="poll_pop.tiles" template="/WEB-INF/views/pop/poll_pop.jsp">
 	</definition> 
 	
-	
-	<!-- calendar -->
+<!-- 일정 시작 -->
+<!-- calendar -->
 	<definition name="calendar.tiles"  template="/WEB-INF/views/callayouts-tiles.jsp">
 		<put-attribute name="header" value="/WEB-INF/views/common/header.jsp"/>
 	    <put-attribute name="header_logo" value="/WEB-INF/views/common/header_logo.jsp"/>
@@ -186,7 +186,7 @@
 	<definition name="search_cal.tiles" extends="calendar.tiles">
 		<put-attribute name="section_cen" value="/WEB-INF/views/calendar/search/search_cal.jsp"/>
 	</definition>
-	
+<!-- 일정 끝 -->
 
 <!-- 이웃 -->
   	<!-- 이웃소식_메인 -->
