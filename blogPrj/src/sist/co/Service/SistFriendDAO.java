@@ -101,6 +101,32 @@ public class SistFriendDAO {
 			dblfols = sqlsession.selectList(ns+"getReceiveDblFols", myid);
 			return dblfols;
 		}
+		
+		//서로이웃팔로잉 수락
+		public boolean acceptDblFols(int seq) throws Exception{
+			//팔로잉 변경
+			sqlsession.update(ns+"acceptDblFols", seq);
+			return true;
+		}
+		
+		//내가 보낸 서로이웃팔로잉
+		public List<SistDblFollowingVO> getSendDblFols(String myid) throws Exception{
+			List<SistDblFollowingVO> dblfols = new ArrayList<SistDblFollowingVO>();
+			dblfols = sqlsession.selectList(ns+"getSendDblFols", myid);
+			return dblfols;
+		}
+		
+		//서로이웃신청 취소
+		public boolean delsendfol(int seq) throws Exception{
+			sqlsession.delete(ns+"delsendfol", seq);
+			return true;
+		}
+		
+		//팔로잉조회
+		public SistDblFollowingVO get2fol(int seq) throws Exception{
+			SistDblFollowingVO fvo= sqlsession.selectOne(ns+"get2fol", seq);
+			return fvo;
+		}
 	
 
 }

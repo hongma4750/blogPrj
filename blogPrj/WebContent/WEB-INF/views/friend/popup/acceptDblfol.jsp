@@ -23,12 +23,13 @@
 
 <!-- 서로이웃맺기 -->
 
-<%String blogId=request.getParameter("blogId"); %>
+<%String blogId=request.getParameter("blogId"); 
+String seq=request.getParameter("seq");%>
 
 <h5><b>&nbsp;&nbsp;서로이웃 맺기</b></h5>
 <hr/>
 
-	<form action="" method="post" id="_myform" name="myform">
+	<form action="acceptSucs.do?blogId=<%=blogId %>&seq=<%=seq%>" method="post" id="_myform" name="myform">
 
 		<div style="margin: 20px;">
 			<span style="color: #2eaa08;"><b><%=blogId%></b></span> 님의 서로이웃 신청을
@@ -36,10 +37,11 @@
 
 			<div style="float: left;">그룹선택&nbsp;</div>
 
-			<select id="_selgroup" name="fnd_groupname"
+			<select id="_selgroup" name="groupname"
 				class="form-control input-sm" style="width: 200px; float: left;">
 				<c:forEach items="${glist }" var="gl">
 					<option value="${gl.fg_groupname }">${gl.fg_groupname }</option>
+					<input type="hidden" name="gname" value="${gl.fg_groupname }"/>
 
 				</c:forEach>
 			</select> &nbsp;<a id="_addG" class="btn btn-default btn-xs"
@@ -77,7 +79,7 @@ function popupClose(){
 
 //서로이웃승낙팝업으로 이동
 function popupNext(){
-	location.href="acceptSucs.do?blogId=<%=blogId %>";
+	location.href="acceptSucs.do?blogId=<%=blogId %>&seq=<%=seq%>";
 }
 
 //그룹추가 버튼클릭시 그룹생성 영역 생김

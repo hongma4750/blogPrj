@@ -15,7 +15,7 @@
 <!-- 이곳은 이웃순서 탭_내용 -->
 
 <c:if test="${empty flist }">
-이웃읎음
+<h4 align="center"><strong>관리중인 이웃이 없습니다.</strong></h4>
 </c:if>
 
 <!-- 이웃이 있으면 -->

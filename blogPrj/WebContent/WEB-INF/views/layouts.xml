@@ -231,7 +231,7 @@
 	    <put-attribute name="header" value="/WEB-INF/views/common/header.jsp"/>
 	    <put-attribute name="header_logo" value="/WEB-INF/views/common/header_logo.jsp"/>
 	    <put-attribute name="header_nav" value="/WEB-INF/views/common/header_nav.jsp"/>
-	    <put-attribute name="blogArea" value="/WEB-INF/views/common/blogArea.jsp"/>
+	    
 	    <put-attribute name="content" value="/WEB-INF/views/friend/setting/settinghome.jsp"/>
 	    <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp"/>
   	</definition>

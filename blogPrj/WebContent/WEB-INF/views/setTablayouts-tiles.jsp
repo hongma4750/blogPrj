@@ -39,7 +39,7 @@
 
 
 		<!-- 이웃설정 -->
-		<div id="content" style="width:750px;background-color: #fff;">
+		<div id="content" style="width:750px;">
 			<tiles:insertAttribute name="content" />
 			
 		</div>

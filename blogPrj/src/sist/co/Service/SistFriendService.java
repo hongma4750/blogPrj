@@ -41,4 +41,16 @@ public interface SistFriendService {
 	
 	//내가받은 서로이웃신청 조회
 	public List<SistDblFollowingVO> getReceiveDblFols(String myid) throws Exception;
+	
+	//내가 보낸 서로이웃팔로잉
+	public List<SistDblFollowingVO> getSendDblFols(String myid) throws Exception;
+	
+	//서로이웃신청 취소
+	public boolean delsendfol(int seq) throws Exception;
+	
+	//서로이웃팔로잉 수락
+	public boolean acceptDblFols(int seq) throws Exception;
+	
+	//팔로잉조회
+	public SistDblFollowingVO get2fol(int seq) throws Exception;
 }

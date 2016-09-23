@@ -46,8 +46,10 @@
 <!-- 이웃의 이웃은 최대3명 추천 -->
 <c:forEach items="${fofflist }" var="recomm_fl" end="2">
 
-
-
+<!-- 내 아이디 제외하기 -->
+<c:if test="${recomm_fl.fnd_fndid ne login.m_id}">
+<!-- 내 친구가 아닐때 추천받기 -->
+<c:if test="${fㅣ.fnd_fndid ne recomm_fl.fnd_fndid}">
 
 
 <form action="addfriend.do?blogid=${recomm_fl.fnd_fndid }" target="FollowPop" method="post">
@@ -110,7 +112,11 @@
 </form>
 
 
+</c:if>
+<!-- 내친구 빼고 추천받기 -->
 
+</c:if>
+<!-- 내 아이디 제외하고 추천받기 -->
 
 </c:forEach>
 

@@ -102,6 +102,40 @@ public class SistFriendImpl implements SistFriendService {
 		return sistFriendDAO.getReceiveDblFols(myid);
 	}
 
+	//내가 보낸 서로이웃신청 조회
+	@Override
+	@Transactional
+	public List<SistDblFollowingVO> getSendDblFols(String myid) throws Exception {
+		return sistFriendDAO.getSendDblFols(myid);
+	}
+
+	//서로이웃 신청 취소
+	@Override
+	@Transactional
+	public boolean delsendfol(int seq) throws Exception {
+		
+		return sistFriendDAO.delsendfol(seq);
+	}
+
+	//서로이웃 수락
+	@Override
+	@Transactional
+	public boolean acceptDblFols(int seq) throws Exception {
+		return sistFriendDAO.acceptDblFols(seq);
+	}
+
+	//팔로잉조회
+	@Override
+	@Transactional
+	public SistDblFollowingVO get2fol(int seq) throws Exception {
+	
+		return sistFriendDAO.get2fol(seq);
+	}
+	
+	
+
+	
+
 
 	
 }
