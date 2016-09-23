@@ -33,7 +33,7 @@
 	
 	<!-- 중간-->
 	<div id="container" >
-		<div id="left_callist" style="background-color:red;">
+		<div id="left_callist" style="background-color:white;">
 			<tiles:insertAttribute name="left_callist"/>	
 		</div>
 			

@@ -99,6 +99,7 @@ $(function(){
 /* 저장할 때 날짜 값 전달 */
 window.onload = function(){
 $("#save").click(function(){
+	
 
 	var syear = $('#datepicker1').val().substring(0,4);
 	var smonth = $('#datepicker1').val().substring(5,7);
@@ -122,11 +123,26 @@ $("#save").click(function(){
 		$("#start_time option").val("종일");
 		$("#end_time option").val("종일");
 	}
+	
+	
+	
 	})
 	
 }; 
 
+// 이전으로 돌아가기
+$(function(){
+	$(".pre").click(function(){
+		history.go(-1);
+	})
+});
 
+
+$(function(){
+	$(".cancel").click(function(){
+		this.form.reset();
+	})
+});
 </script>
 
 
@@ -143,13 +159,16 @@ $("#save").click(function(){
 				<a href="#" class="pre" style="font-size: 13px;">이전으로 돌아가기</a>
 			</td>
 		</tr>
-		<tr>
-			<td colspan="2" height="47px">
-				<button type="submit" class="save_btn" >
+		 <tr>
+		 	<td>
+				<button type="submit" class="save_btn" id="save">
 					<strong>저장</strong>
 				</button>
+				<button type="button" class="cancel" >
+					<strong>취소</strong>
+				</button>
 			</td>
-		</tr>
+		</tr> 
 	</table>
 	</div>
 	<!-- 헤더 끝 -->
@@ -169,7 +188,7 @@ $("#save").click(function(){
 			<span class="tit">제목</span>
 			
 			<div style="display: inline-block;">
-				<input type="text" class="input_txt" name="sch_title">
+				<input type="text" class="input_txt" name="sch_title" id="sch_title">
 			</div>
 			
 			<div class="important_chk" style="display: inline;">
@@ -1089,7 +1108,7 @@ $("#save").click(function(){
     </tr>
     <!-- 알림 끝-->
     
-    <tr>
+<!--     <tr>
     	<td colspan="9">
     	
     		<button type="submit" class="save_btn" id="save">
@@ -1102,7 +1121,7 @@ $("#save").click(function(){
 				<strong>취소</strong>
 			</button>
     	</td>
-    </tr>
+    </tr> -->
 	</table>
 	
 	</div>

@@ -185,6 +185,13 @@ $(function (){
 		alert("일정을 삭제하시겠습니까?");
 	})
 })
+
+//이전으로 돌아가기
+$(function(){
+	$(".pre").click(function(){
+		history.go(-1);
+	})
+});
 </script>
 
 <div id="section_cen">
