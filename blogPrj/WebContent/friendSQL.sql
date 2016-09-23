@@ -3,7 +3,8 @@
 
 --1. 이웃 맺기 테이블(일방적으로 이루어짐)
 --2016.09.18 following table삭제
-select * from fgroup
+select * from dblfollowing
+delete FRIEND where fnd_seq=7
 
 drop table following
 cascade constraint;
@@ -64,6 +65,7 @@ references member(m_id);
 --2016.09.18 fnd_foldate date not null --이웃,서로이웃 추가일  추가?
 
 select * from friend
+delete friend where fnd_myid='chloevergreen' and fnd_fndid='bbb123'
 
 drop table friend
 cascade constraint;
@@ -140,11 +142,11 @@ select* from friend
 --insert into FOLLOWING values (seq_following.NEXTVAL, 'bom', 'summer', '20160912' );
 
 insert into friend
-values(seq_friend.NEXTVAL, 'aa1212', 'ccc123', '친구들', 1,sysdate,0); 
+values(seq_friend.NEXTVAL, 'aa1212', 'summer123', '친구들', 1,sysdate,0); 
 
 insert into fsetting values(seq_fsetting.NEXTVAL, 'bom', 0);
 
-insert into fgroup values(seq_fgroup.NEXTVAL, '친구들', 'chloevergreen',0);
+insert into fgroup values(seq_fgroup.NEXTVAL, '친구들', 'summer123',0);
 
 --summer<->aaa 서로이웃
 

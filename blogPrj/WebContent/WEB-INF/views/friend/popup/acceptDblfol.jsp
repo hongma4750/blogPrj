@@ -82,7 +82,7 @@ function popupClose(){
 	location.href="acceptSucs.do?blogId=<%=blogId %>&seq=<%=seq%>";
 } --%>
 $("#_Ok").click(function name(){
-	$("#_myform").attr({"target":"_self", "action":"acceptSucs.do"}).submit();	
+	$("#_myform").attr({"target":"_blank", "action":"acceptSucs.do?blogId=<%=blogId %>&seq=<%=seq%>"}).submit();	
 });
 
 //그룹추가 버튼클릭시 그룹생성 영역 생김

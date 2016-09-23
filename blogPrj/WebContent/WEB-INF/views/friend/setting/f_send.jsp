@@ -50,6 +50,9 @@
 			<form name="frmForm2" id="_frmForm2" action="delsendfol.do" method="post">
 			<c:forEach items="${Sfolist }" var="Sfl">
 			
+			<!-- 미확인만보기 -->
+			<c:if test="${Sfl.df_accept==0}">
+			
 			<tr>
 				<td><input type="checkbox" id="_chk"></td>
 				<td>${Sfl.df_receive }</td>
@@ -62,8 +65,8 @@
 			
 				<input type="hidden" id="_seq" name="seq" value="${Sfl.df_seq }" />
 				
-			
-
+			</c:if>
+            <!-- 미확인만보기 -->
             
 		</c:forEach>
 		</form>
