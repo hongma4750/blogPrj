@@ -17,7 +17,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <!-- 부트스트랩 링크 -->
-
+<script src="js/angular/angular.js"></script>
 
 
 <!-- asset CSS -->
@@ -43,11 +43,9 @@
     margin-right: 4px;
     width: 40px;
 }
-
  .subject {
     display: block;
 }
-
 .dropdown-menu.inbox li a .subject .from {
     font-size: 12px;
     font-weight: 600;
@@ -214,30 +212,43 @@
 		
 		
 		<!-- 메세지 -->
-		<div style="width:100%; height:80%; ">
-		
-			<c:forEach items="${newMyMessageList }" var="myMessage">
+		<div id="temps">
+			<div style="width:100%; height:80%; " id="mymynoticeMessage" class="mymynoticeMessage">
 			
-				<div class="list-group" style="margin:auto; padding:auto;">
-				  <a href="#" class="list-group-item ">
-				  	<span class="photo" style="maring:auto; padding:auto;">
-				  		<img alt="avatar" src="${myMessage.m_photo }" style="width:35px;height:40px;">
-				  	</span>
-				  	
-				  	<span class="subject">
-					    <span class="from">${myMessage.m_name } </span>
-		             </span>
-		             <span class="message">${myMessage.message_content }</span>
-				  </a>
-				</div>
-				
-			</c:forEach>
+				<c:forEach items="${newMyMessageList }" var="myMessage"> 
 
+					<div class="list-group" style="margin:auto; padding:auto;">
+					  <a href="#" class="list-group-item ">
+					  	<span class="photo" style="maring:auto; padding:auto;">
+					  		<img alt="avatar" src="${myMessage.m_photo }" style="width:35px;height:40px;">
+					  	</span>
+					  	
+					  	<span class="subject">
+						    <span class="from">${myMessage.m_name } </span>
+			             </span>
+			             <span class="message">${myMessage.message_content}</span>
+					  </a>
+					</div>
+
+				
+				</c:forEach>
+				
+				
+ 
+
+	
+			</div>
 		</div>
+
+	
+	
+	
+	
+	
 		
 	</div>
 	
-	
+
 	<div style="width:100%; height:20%; background-color:skyblue">
 		<div class="row" style="width:100%; height:100%; padding:auto; margin:auto;">
 			<button class="btn btn-default" style="width:100%; height:100%;">see all message</button>
@@ -261,6 +272,7 @@ $('#userInfo').click(function(){
  /* 팝업 사라지는 자바 스크립트*/
  $(document).ready(function(){
 	 var myMessageCount = '${myMessageCount}';
+	 
 		var m_id = '${login.m_id}';
 		var checkNewMessage = false;
 		var checkNewMessageFiveCount = 0;
@@ -272,8 +284,6 @@ $('#userInfo').click(function(){
 	             var l_position = $(this).offset();
 	             l_position.right = parseInt(l_position.left) + ($(this).width());
 	             l_position.bottom = parseInt(l_position.top) + parseInt($(this).height());
-
-
 	             if( ( l_position.left <= e.pageX && e.pageX <= l_position.right )
 	                 && ( l_position.top <= e.pageY && e.pageY <= l_position.bottom ) )
 	             {
@@ -345,21 +355,17 @@ $('#userInfo').click(function(){
 		       
 		    }, 1000);	//5초
 		  });
-
-
+ 
+ 
 	 });
-
-/* 팝업 사라지는 자바 스크립트*/
-
-function printNewNoticeMessage(){
-	 //$("#mymynoticeMessage").remove();
-}
  
  /* 팝업 사라지는 자바 스크립트*/
  
+ function printNewNoticeMessage(){
+	 $("#mymynoticeMessage").remove();
+ }
  
-
- 
+          
  
 </script>
 
